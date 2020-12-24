@@ -1,4 +1,9 @@
+// 20201224 CHEN PEI CHI 1.0
+// 20201225 CHEN PEI CHI 2.0
+// 20201225 CHEN PEI CHI 3.0
+
 #include <iostream>
+#include <queue>
 using namespace std;
 
 struct node 
@@ -8,14 +13,19 @@ struct node
     struct node* right;
 };
 
+queue<node*> qu;
+
+void levelorder1(node*);
 void preorder1(node*);
 void inorder1(node*);
 void postorder1(node*);
 
+void levelorder2(node*);
 void preorder2(node*);
 void inorder2(node*);
 void postorder2(node*);
 
+void levelorder3(node*);
 void preorder3(node*);
 void inorder3(node*);
 void postorder3(node*);
@@ -54,6 +64,10 @@ int main(void)
     p6->right = NULL;
     p7->left = NULL;
     p7->right = NULL;
+
+    cout << "{1, 2, 3, 4, 5, 6, 7, } 的寬度優先：";
+    levelorder1(root);
+    cout << endl;
 
     cout << "{1, 2, 3, 4, 5, 6, 7, } 的前序走訪：";
     preorder1(root);
@@ -103,6 +117,10 @@ int main(void)
     a7->left = NULL;
     a7->right = NULL;
 
+    cout << "{7, 6, 5, 4, 3, 2, 1, } 的寬度優先：";
+    levelorder2(aroot);
+    cout << endl;
+
     cout << "{7, 6, 5, 4, 3, 2, 1, } 的前序走訪：";
     preorder2(aroot);
     cout << endl;
@@ -151,6 +169,10 @@ int main(void)
     b7->left = NULL;
     b7->right = NULL;
 
+    cout << "{4, 6, 5, 2, 7, 1, 3, } 的寬度優先：";
+    levelorder3(broot);
+    cout << endl;
+
     cout << "{4, 6, 5, 2, 7, 1, 3, } 的前序走訪：";
     preorder3(broot);
     cout << endl;
@@ -165,6 +187,34 @@ int main(void)
 }
 
 // {1, 2, 3, 4, 5, 6, 7, }
+void levelorder1(node* now) 
+{
+    qu.push(now);
+    while (!qu.empty()) 
+    {
+        cout << qu.front()->data << " ";
+        if (qu.front()->left != NULL) 
+        {
+            qu.push(qu.front()->left);
+        }
+        if (qu.front()->right != NULL) 
+        {
+            qu.push(qu.front()->right);
+        }
+        qu.pop();
+    }
+}
+
+void breadthfirst1(node* p)
+{
+    if (p)
+    {
+        cout << p->data << " ";
+        preorder1(p->left);
+        preorder1(p->right);
+    }
+}
+
 void preorder1(node* p)
 {
     if (p)
@@ -196,6 +246,24 @@ void postorder1(node* p)
 }
 
 // {7, 6, 5, 4, 3, 2, 1, }
+void levelorder2(node* now)
+{
+    qu.push(now);
+    while (!qu.empty())
+    {
+        cout << qu.front()->data << " ";
+        if (qu.front()->left != NULL)
+        {
+            qu.push(qu.front()->left);
+        }
+        if (qu.front()->right != NULL)
+        {
+            qu.push(qu.front()->right);
+        }
+        qu.pop();
+    }
+}
+
 void preorder2(node* a) 
 {
     if (a) 
@@ -227,6 +295,24 @@ void postorder2(node* a)
 }
 
 // {4, 6, 5, 2, 7, 1, 3, }
+void levelorder3(node* now)
+{
+    qu.push(now);
+    while (!qu.empty())
+    {
+        cout << qu.front()->data << " ";
+        if (qu.front()->left != NULL)
+        {
+            qu.push(qu.front()->left);
+        }
+        if (qu.front()->right != NULL)
+        {
+            qu.push(qu.front()->right);
+        }
+        qu.pop();
+    }
+}
+
 void preorder3(node* b)
 {
     if (b)
